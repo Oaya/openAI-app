@@ -11,8 +11,11 @@ const openai = new OpenAIApi(config);
 
 
 export default function ApiProvider(props) {
-  const [responses, setResponses] = useState('')
+  const [responses, setResponses] = useState([])
 
+  useEffect(() => {
+
+  }, [])
   const getApiResponse = (query) => {
     let prompt = query
     openai.createCompletion('text-davinci-001', {
@@ -20,8 +23,12 @@ export default function ApiProvider(props) {
       temperature: 0,
       max_tokens: 6,
     }).then(res => {
-      console.log(res.data.choices[0].text)
-      setResponses(res.data.choices[0].text)
+      const response = res.data.choices[0].text;
+      const obj = { prompt: query, response: response }
+      setResponses((prev) => {
+        return [...prev, obj]
+      })
+      console.log(responses)
     })
 
   }

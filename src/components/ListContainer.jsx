@@ -5,8 +5,15 @@ export default function ListContainer() {
 
   const { responses } = useContext(ApiContext);
 
-  console.log(responses)
+
   return (
-    <div></div>
+    <div>
+      {responses.map(response => (
+        <ul key={response.prompt}>
+          <li>{response.prompt}</li>
+          <li>{response.response}</li>
+        </ul>
+      ))}
+    </div>
   )
 }
