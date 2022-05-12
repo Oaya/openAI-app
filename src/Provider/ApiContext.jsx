@@ -17,7 +17,7 @@ export default function ApiProvider(props) {
 
   }, [])
   const getApiResponse = (query) => {
-    let prompt = `Translate this into 1. French, 2. Spanish and 3. Japanese: \n\n${query}\n\n1.`
+    let prompt = `Translate this into 1. Xhosa, 2. Spanish and 3. Japanese: \n\n${query}\n\n1.`
     openai.createCompletion('text-davinci-001', {
       prompt: prompt,
       temperature: 0.3,

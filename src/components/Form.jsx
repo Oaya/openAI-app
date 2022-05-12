@@ -1,8 +1,29 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { ApiContext } from '../Provider/ApiContext';
 import useSpeechToText from 'react-hook-speech-to-text';
+import Select from 'react-select'
 
-
+const languagesList = [
+  "Arabic",
+  "Chinese ",
+  "Czech",
+  "Dutch",
+  "English",
+  "French",
+  "German",
+  "Greek",
+  "Hindi",
+  "Irish",
+  "Italian",
+  "Japanese",
+  "Korean",
+  "Portuguese",
+  "Russian",
+  "Spanish",
+  "Thai",
+  "Vietnamese",
+];
+const languagesListObj = languagesList.map(lang => ({ label: lang, value: lang }))
 export default function Form() {
 
   const { getApiResponse } = useContext(ApiContext);
@@ -35,6 +56,12 @@ export default function Form() {
 
   return (
     <div>
+      <div>
+        <p>What language do you want to translate to??</p>
+
+        <Select isMulti options={languagesListObj} onChange={out => console.log(out)} />
+
+      </div>
       <div>
         <p>
           Enter the sentence you want to translate or talk speak it in English
