@@ -2,6 +2,9 @@ import React from 'react'
 
 export default function Header() {
   return (
-    <div>Header</div>
+    <header>
+      <h1>Hello, World</h1>
+      <p>Let's Learn Languages with AI </p>
+    </header>
   )
 }

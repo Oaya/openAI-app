@@ -17,11 +17,14 @@ export default function ApiProvider(props) {
 
   }, [])
   const getApiResponse = (query) => {
-    let prompt = query
+    let prompt = `Translate this into 1. French, 2. Spanish and 3. Japanese: \n\n${query}\n\n1.`
     openai.createCompletion('text-davinci-001', {
       prompt: prompt,
-      temperature: 0,
-      max_tokens: 6,
+      temperature: 0.3,
+      max_tokens: 100,
+      top_p: 1.0,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.0,
     }).then(res => {
       const response = res.data.choices[0].text;
       const obj = { prompt: query, response: response }
