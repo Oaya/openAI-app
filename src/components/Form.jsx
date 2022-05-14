@@ -1,7 +1,7 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { ApiContext } from '../Provider/ApiContext';
 import useSpeechToText from 'react-hook-speech-to-text';
-import Select from 'react-select'
+import Creatable from 'react-select/creatable';
 
 const languagesList = [
   "Arabic",
@@ -23,11 +23,13 @@ const languagesList = [
   "Thai",
   "Vietnamese",
 ];
-const languagesListObj = languagesList.map(lang => ({ label: lang, value: lang }))
+const languagesListObj = languagesList.map(lang => ({ label: lang, value: lang }));
+
 export default function Form() {
 
   const { getApiResponse } = useContext(ApiContext);
-  const queryInputRef = useRef()
+  const queryInputRef = useRef();
+  const [typedLang, setTypedLang] = useState('')
 
   const { error,
     interimResult,
@@ -50,6 +52,11 @@ export default function Form() {
     queryInputRef.current.value = '';
   }
 
+  const handleChange = (input) => {
+    console.log(input)
+    setTypedLang(input)
+  }
+
   if (error) {
     return <p>Web Speech API is not available in this browser</p>
   }
@@ -59,7 +66,14 @@ export default function Form() {
       <div>
         <p>What language do you want to translate to??</p>
 
-        <Select isMulti options={languagesListObj} onChange={out => console.log(out)} />
+        <Creatable
+          isMulti
+          options={languagesListObj}
+          onChange={handleChange}
+          value={typedLang}
+          placeholder="Select from list or type in here"
+        />
+
 
       </div>
       <div>
