@@ -48,12 +48,12 @@ export default function Form() {
     e.preventDefault();
     //search function from context//
     const enteredInput = queryInputRef.current.value;
-    getApiResponse(enteredInput);
+    getApiResponse(enteredInput, typedLang);
     queryInputRef.current.value = '';
   }
 
   const handleChange = (input) => {
-    console.log(input)
+    console.log({ input })
     setTypedLang(input)
   }
 

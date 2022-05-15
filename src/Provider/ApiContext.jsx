@@ -13,12 +13,13 @@ const openai = new OpenAIApi(config);
 export default function ApiProvider(props) {
   const [responses, setResponses] = useState([])
 
-  useEffect(() => {
+  const getApiResponse = (query, languages) => {
+    const langString = languages?.map(({ value }) => value).join(' and ')
+    console.log(langString)
 
-  }, [])
-  const getApiResponse = (query) => {
-    let prompt = `Translate this into 1. Xhosa, 2. Spanish and 3. Japanese: \n\n${query}\n\n1.`
-    openai.createCompletion('text-davinci-001', {
+    let prompt = `Translate this into ${langString}: \n${query}\n`;
+    console.log(prompt)
+    openai.createCompletion('text-davinci-002', {
       prompt: prompt,
       temperature: 0.3,
       max_tokens: 100,
