@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { Fragment, useContext, useRef, useState } from 'react';
 import useSpeechToText from 'react-hook-speech-to-text';
 import Creatable from 'react-select/creatable';
 
@@ -31,6 +31,10 @@ export default function Form() {
     e.preventDefault();
     //search function from context//
     const enteredInput = queryInputRef.current.value;
+
+
+
+    console.log(enteredInput, typedLang)
     getApiResponse(enteredInput, typedLang);
     queryInputRef.current.value = '';
     setTypedLang('')
@@ -49,16 +53,22 @@ export default function Form() {
     <div>
       <div>
         <p>What languages do you want to translate to??</p>
+        <Fragment>
+          <Creatable
+            isMulti
+            options={languagesListObj}
+            onChange={handleChange}
+            value={typedLang}
+            placeholder="Select from list or type in here"
+          />
+          <input
+            tabIndex={-1}
+            autoComplete="off"
+            style={{ opacity: 0, height: 0 }}
 
-        <Creatable
-          isMulti
-          options={languagesListObj}
-          onChange={handleChange}
-          value={typedLang}
-          placeholder="Select from list or type in here"
-        />
-
-
+            required
+          />
+        </Fragment>
       </div>
       <div>
         <p>
