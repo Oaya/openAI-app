@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import useSpeechToText from 'react-hook-speech-to-text';
 import Creatable from 'react-select/creatable';
 import { Textarea, Button } from '@chakra-ui/react'
@@ -62,15 +62,15 @@ export default function Form() {
       <div>
         {inputError && <Error error={inputError} />}
         <p>What languages do you want to translate to??</p>
-        <Fragment>
-          <Creatable
-            isMulti
-            options={languagesListObj}
-            onChange={handleChange}
-            value={option}
-            placeholder="Select from list or type in here"
-          />
-        </Fragment>
+
+        <Creatable
+          isMulti
+          options={languagesListObj}
+          onChange={handleChange}
+          value={option}
+          placeholder="Select from list or type in here"
+        />
+
       </div>
       <div>
         <p>

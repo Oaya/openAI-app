@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { Heading } from '@chakra-ui/react';
 
 export default function Header() {
   return (
-    <header>
-      <h1>Hello, World!</h1>
-      <p>Let's Learn Languages With AI </p>
-    </header>
+    <Heading as='h2' size='xl'>
+      Hello, World!
+    </Heading>
+
+
+
   )
 }
