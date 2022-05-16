@@ -1,28 +1,11 @@
 import React, { useContext, useRef, useState } from 'react';
-import { ApiContext } from '../Provider/ApiContext';
 import useSpeechToText from 'react-hook-speech-to-text';
 import Creatable from 'react-select/creatable';
 
-const languagesList = [
-  "Arabic",
-  "Chinese ",
-  "Czech",
-  "Dutch",
-  "English",
-  "French",
-  "German",
-  "Greek",
-  "Hindi",
-  "Irish",
-  "Italian",
-  "Japanese",
-  "Korean",
-  "Portuguese",
-  "Russian",
-  "Spanish",
-  "Thai",
-  "Vietnamese",
-];
+import { ApiContext } from '../Provider/ApiContext';
+import { languagesList } from '../languageData';
+
+
 const languagesListObj = languagesList.map(lang => ({ label: lang, value: lang }));
 
 export default function Form() {
@@ -50,13 +33,14 @@ export default function Form() {
     const enteredInput = queryInputRef.current.value;
     getApiResponse(enteredInput, typedLang);
     queryInputRef.current.value = '';
+    setTypedLang('')
   }
 
   const handleChange = (input) => {
-    console.log({ input })
     setTypedLang(input)
   }
 
+  //for the case speech to text doesn't work//
   if (error) {
     return <p>Web Speech API is not available in this browser</p>
   }
@@ -64,7 +48,7 @@ export default function Form() {
   return (
     <div>
       <div>
-        <p>What language do you want to translate to??</p>
+        <p>What languages do you want to translate to??</p>
 
         <Creatable
           isMulti
@@ -78,15 +62,15 @@ export default function Form() {
       </div>
       <div>
         <p>
-          Enter the sentence you want to translate or talk speak it in English
+          Enter the sentence you want to translate or speak it in English
         </p>
         <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-          {isRecording ? "stop recording" : "start Recording"}
+          {isRecording ? "Stop recording" : "Start Recording"}
         </button>
       </div>
       <form onSubmit={handleSubmit}>
         <textarea type='text' ref={queryInputRef} value={interimResult} />
-        <button >Search</button>
+        <button>Translate</button>
       </form>
     </div>
 

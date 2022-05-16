@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { ApiContext } from '../Provider/ApiContext'
+import React, { useContext } from 'react';
+import { ApiContext } from '../Provider/ApiContext';
 
 export default function ListContainer() {
 
