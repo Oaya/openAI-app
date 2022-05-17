@@ -5,7 +5,6 @@ import TranslateListItem from './TranslateListItem';
 
 export default function TranslateList() {
   const { responses } = useContext(ApiContext);
-  console.log(responses)
 
   return (
     <Box>
@@ -22,16 +21,13 @@ export default function TranslateList() {
         {
           responses.reverse().map((res, i) => (
             <TranslateListItem
-
               key={i}
               prompt={res.prompt}
               response={res.response}
               languages={res.languages}
-
             />
           ))
         }
-
       </Box>
     </Box>
   )
