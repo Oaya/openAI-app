@@ -71,7 +71,7 @@ export default function Form() {
   }
 
   return (
-    <Box >
+    <Box w='70%' m='auto'>
       <Box m='auto' mb='10'>
         {inputError && <Error error={inputError} />}
         <Text py='2' fontSize='xl' fontWeight={'bold'}>

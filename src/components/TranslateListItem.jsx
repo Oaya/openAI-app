@@ -4,8 +4,7 @@ import React from 'react'
 export default function TranslateListItem({ prompt, response, languages }) {
 
   return (
-
-    <TableContainer bg={"#EDFDFD"} mt={'5'} p={'5'}>
+    <TableContainer bg={"#EDFDFD"} my={'5'} p={'5'} >
       <Table colorScheme='teal' variant={'unstyled'} >
         <Tbody >
           <Tr >

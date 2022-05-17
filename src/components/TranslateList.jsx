@@ -8,8 +8,8 @@ export default function TranslateList() {
   console.log(responses)
 
   return (
-    <Box>
-      <Heading as='h2' size='lg'>
+    <Box w='70%' m='auto'>
+      <Heading as='h2' size='lg' >
         Here are Your Translated List
       </Heading>
       {

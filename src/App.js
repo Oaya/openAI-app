@@ -8,7 +8,7 @@ function App() {
 
 
   return (
-    <Box w='70%' m='auto'>
+    <Box>
       <Header />
       <Form />
       <TranslateList />
