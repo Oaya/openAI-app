@@ -15,7 +15,9 @@ export default function TranslateList() {
       {
         responses.reverse().map((res, i) => (
           <TranslateListItem
-            key={i} prompt={res.prompt}
+
+            key={i}
+            prompt={res.prompt}
             response={res.response}
             languages={res.languages}
 

@@ -18,7 +18,7 @@ export default function ApiProvider(props) {
     const langString = langList.join(' and ');
 
     let prompt = `Translate this into ${langString}: \n${query}\n`;
-    console.log(langList, langString)
+
     if (query && languages) {
       openai.createCompletion('text-davinci-002', {
         prompt: prompt,
