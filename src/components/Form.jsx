@@ -1,14 +1,14 @@
 import React, { useContext, useRef, useState } from 'react';
 import useSpeechToText from 'react-hook-speech-to-text';
 import Creatable from 'react-select/creatable';
-import { Textarea, Button, Box, Text, Flex, Spacer } from '@chakra-ui/react'
+import { Textarea, Button, Box, Text, Flex, Spacer } from '@chakra-ui/react';
 
 
 import { ApiContext } from '../Provider/ApiContext';
 import { languagesList } from '../languageData';
 import Error from './Error';
 
-const languagesListObj = languagesList.map(lang => ({ label: lang, value: lang }));
+const languagesListObj = languagesList.map(lang => ({ label: lang, value: lang, hi: lang }));
 
 export default function Form() {
   const { getApiResponse, setIsLoading, isLoading } = useContext(ApiContext);
