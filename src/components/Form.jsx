@@ -1,7 +1,8 @@
 import React, { Fragment, useContext, useRef, useState } from 'react';
 import useSpeechToText from 'react-hook-speech-to-text';
 import Creatable from 'react-select/creatable';
-import { Textarea, Button } from '@chakra-ui/react'
+import { Textarea, Button, IconButton } from '@chakra-ui/react'
+
 
 import { ApiContext } from '../Provider/ApiContext';
 import { languagesList } from '../languageData';
@@ -44,7 +45,6 @@ export default function Form() {
 
     } else {
 
-      console.log(enteredInput, option)
       getApiResponse(enteredInput, option);
       queryInputRef.current.value = '';
       setOption([]);
@@ -85,14 +85,16 @@ export default function Form() {
           Enter the sentence you want to translate or speak it in English
         </p>
 
-        <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-          {isRecording ? "Stop recording" : "Start Recording"}
-        </button>
-      </div>
-      <form >
-        <Textarea type='text' ref={queryInputRef} value={interimResult} />
 
-        {isLoading ? (<Button
+      </div>
+
+      <Textarea type='text' ref={queryInputRef} value={interimResult} size='sm' />
+
+      <Button onClick={isRecording ? stopSpeechToText : startSpeechToText} colorScheme='cyan' variant='outline'>
+        {isRecording ? "Stop recording" : "Start Recording"}
+      </Button>
+      {
+        isLoading ? (<Button
           isLoading
           loadingText='Searching...'
           colorScheme='cyan'
@@ -103,8 +105,8 @@ export default function Form() {
           (<Button colorScheme='cyan' variant='solid' onClick={handleSubmit} color='white'>
             Translate
           </Button>)
-        }
-      </form>
+      }
+
     </Fragment>
 
   )
