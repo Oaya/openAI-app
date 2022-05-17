@@ -71,7 +71,10 @@ export default function Form() {
   }
 
   return (
-    <Box w='70%' m='auto'>
+    <Box w='70%' m='auto' my={'8'}
+      bgGradient="linear(to-l, #6600ff,#0a2269)"
+      bgClip="text"
+      fontWeight="extrabold">
       <Box m='auto' mb='10'>
         {inputError && <Error error={inputError} />}
         <Text py='2' fontSize='xl' fontWeight={'bold'}>
@@ -92,20 +95,24 @@ export default function Form() {
           Type the sentence you want to translate or speak it in English :
         </Text>
         <Spacer />
-        <Button onClick={isRecording ? stopSpeechToText : startSpeechToText} colorScheme='cyan' variant='outline'>
+        <Button onClick={isRecording ? stopSpeechToText : startSpeechToText} colorScheme='telegram' variant='outline' bg="white">
           {isRecording ? "Stop recording" : "Start Recording"}
         </Button>
       </Flex>
 
       <Textarea
+        mt={'1'}
+        bg='white'
         type='text'
         ref={queryInputRef}
         value={interimResult}
-        size='sm'
+        size='md'
         placeholder='E.g.  How are you?'
+        fontWeight={'bold'}
+        color='blackAlpha.700'
       />
 
-      <Box mt={'3'} textAlign={'right'} >
+      <Box textAlign={'right'} my={'3'} >
         {
           isLoading ? (
             <Button
@@ -130,7 +137,7 @@ export default function Form() {
             </Button>)
         }
       </Box>
-    </Box>
+    </Box >
 
   )
 }

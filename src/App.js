@@ -8,7 +8,7 @@ function App() {
 
 
   return (
-    <Box>
+    <Box bg={'#EDFDFD'} >
       <Header />
       <Form />
       <TranslateList />
