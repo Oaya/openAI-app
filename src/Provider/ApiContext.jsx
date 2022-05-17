@@ -1,14 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Configuration, OpenAIApi } from "openai";
-
-export const ApiContext = createContext();
-
 
 //set congiguration for openAI//
 const config = new Configuration({
   apiKey: process.env.REACT_APP_API_KEY
 });
 const openai = new OpenAIApi(config);
+
+export const ApiContext = createContext();
 
 export default function ApiProvider(props) {
   const [responses, setResponses] = useState([]);
@@ -19,7 +18,6 @@ export default function ApiProvider(props) {
     let prompt = `Translate this into ${langString}: \n${query}\n`;
 
     if (query && languages) {
-
       openai.createCompletion('text-davinci-002', {
         prompt: prompt,
         temperature: 0.3,
@@ -27,18 +25,19 @@ export default function ApiProvider(props) {
         top_p: 1.0,
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
-      }).then(res => {
-        const response = res.data.choices[0].text;
-        const obj = { prompt: query, response: response }
-        setResponses((prev) => {
-          return [...prev, obj]
-        });
-        setIsLoading(false)
-
-      }).catch(err => {
-        setIsLoading(false)
-        throw Error("Something went wrong. Please try again.", err);
       })
+        .then(res => {
+          const response = res.data.choices[0].text;
+          const obj = { prompt: query, response: response }
+          setResponses((prev) => {
+            return [...prev, obj]
+          });
+          setIsLoading(false)
+        })
+        .catch(err => {
+          setIsLoading(false)
+          throw Error("Something went wrong. Please try again.", err);
+        })
     } else {
       setIsLoading(false)
       throw Error("Couldn't find query and languages. Please try again.");

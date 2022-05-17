@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { Fragment } from "react";
 import Form from "./components/Form";
 import Header from "./components/Header";
@@ -7,11 +8,11 @@ function App() {
 
 
   return (
-    <Fragment>
+    <Box w='70%' m='auto'>
       <Header />
       <Form />
       <ListContainer />
-    </Fragment>
+    </Box>
   );
 }
 
