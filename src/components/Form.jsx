@@ -71,13 +71,16 @@ export default function Form() {
   }
 
   return (
-    <Box w='70%' m='auto' my={'8'}
-      bgGradient="linear(to-l, #6600ff,#0a2269)"
-      bgClip="text"
-      fontWeight="extrabold">
+    <Box w='70%' m='auto' my={'8'} >
       <Box m='auto' mb='10'>
         {inputError && <Error error={inputError} />}
-        <Text py='2' fontSize='xl' fontWeight={'bold'}>
+        <Text
+          py='2'
+          fontSize='xl'
+          bgGradient="linear(to-l, #6600ff,#0a2269)"
+          bgClip="text"
+          fontWeight="extrabold"
+        >
           What languages do you want to translate to :
         </Text>
 
@@ -91,7 +94,11 @@ export default function Form() {
       </Box>
 
       <Flex direction={'row'} >
-        <Text py='2' fontSize='xl' fontWeight={'bold'}>
+        <Text py='2'
+          fontSize='xl'
+          bgGradient="linear(to-l, #6600ff,#0a2269)"
+          bgClip="text"
+          fontWeight="extrabold">
           Type the sentence you want to translate or speak it in English :
         </Text>
         <Spacer />
@@ -137,7 +144,7 @@ export default function Form() {
             </Button>)
         }
       </Box>
-    </Box >
+    </Box>
 
   )
 }

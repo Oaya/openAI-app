@@ -8,23 +8,31 @@ export default function TranslateList() {
   console.log(responses)
 
   return (
-    <Box w='70%' m='auto'>
-      <Heading as='h2' size='lg' >
-        Here are Your Translated List
-      </Heading>
-      {
-        responses.reverse().map((res, i) => (
-          <TranslateListItem
+    <Box>
+      <Box w='70%' m='auto' mb={'10'} >
+        <Heading
+          as='h2'
+          size='lg'
+          bgGradient="linear(to-l, #6600ff,#0a2269)"
+          bgClip="text"
+          fontWeight="extrabold"
+        >
+          Here are Your Translated List :
+        </Heading>
+        {
+          responses.reverse().map((res, i) => (
+            <TranslateListItem
 
-            key={i}
-            prompt={res.prompt}
-            response={res.response}
-            languages={res.languages}
+              key={i}
+              prompt={res.prompt}
+              response={res.response}
+              languages={res.languages}
 
-          />
-        ))
-      }
+            />
+          ))
+        }
 
+      </Box>
     </Box>
   )
 }
