@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { Fragment, useContext, useRef, useState } from 'react';
 import useSpeechToText from 'react-hook-speech-to-text';
 import Creatable from 'react-select/creatable';
 import { Textarea, Button } from '@chakra-ui/react'
@@ -11,10 +11,11 @@ import Error from './Error';
 const languagesListObj = languagesList.map(lang => ({ label: lang, value: lang }));
 
 export default function Form() {
-  const { getApiResponse } = useContext(ApiContext);
+  const { getApiResponse, setIsLoading, isLoading } = useContext(ApiContext);
   const queryInputRef = useRef();
   const [option, setOption] = useState([]);
   const [inputError, setInputError] = useState('');
+
 
   const { error,
     interimResult,
@@ -31,13 +32,16 @@ export default function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true)
 
     const enteredInput = queryInputRef.current.value;
 
     if (!enteredInput) {
       setInputError('Please input the sentence.')
+
     } else if (option.length === 0) {
-      setInputError("Please set Languages")
+      setInputError("Please set Languages");
+
     } else {
 
       console.log(enteredInput, option)
@@ -45,20 +49,24 @@ export default function Form() {
       queryInputRef.current.value = '';
       setOption([]);
       setInputError('');
+
     };
+
   };
 
   const handleChange = (input) => {
     setOption(input);
-  }
+  };
+
 
   //for the case speech to text doesn't work//
   if (error) {
-    return <p>Web Speech API is not available in this browser</p>
+    setInputError("Web Speech API is not available in this browser")
+    return <Error error={error} />
   }
 
   return (
-    <div>
+    <Fragment>
       <div>
         {inputError && <Error error={inputError} />}
         <p>What languages do you want to translate to??</p>
@@ -76,17 +84,28 @@ export default function Form() {
         <p>
           Enter the sentence you want to translate or speak it in English
         </p>
+
         <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
           {isRecording ? "Stop recording" : "Start Recording"}
         </button>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form >
         <Textarea type='text' ref={queryInputRef} value={interimResult} />
-        <Button colorScheme='teal' variant='solid'>
-          Translate
-        </Button>
+
+        {isLoading ? (<Button
+          isLoading
+          loadingText='Searching...'
+          colorScheme='cyan'
+          variant='solid'
+          color='white'
+        > Submit
+        </Button>) :
+          (<Button colorScheme='cyan' variant='solid' onClick={handleSubmit} color='white'>
+            Translate
+          </Button>)
+        }
       </form>
-    </div>
+    </Fragment>
 
   )
 }

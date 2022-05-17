@@ -10,45 +10,47 @@ const config = new Configuration({
 });
 const openai = new OpenAIApi(config);
 
-
 export default function ApiProvider(props) {
-  const [responses, setResponses] = useState([])
+  const [responses, setResponses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getApiResponse = (query, languages) => {
     const langString = languages?.map(({ value }) => value).join(' and ');
-    console.log(langString)
-
     let prompt = `Translate this into ${langString}: \n${query}\n`;
-    console.log(prompt);
 
-    // if (query && languages) {
-    //   openai.createCompletion('text-davinci-002', {
-    //     prompt: prompt,
-    //     temperature: 0.3,
-    //     max_tokens: 100,
-    //     top_p: 1.0,
-    //     frequency_penalty: 0.0,
-    //     presence_penalty: 0.0,
-    //   }).then(res => {
-    //     const response = res.data.choices[0].text;
+    if (query && languages) {
 
-    //     const obj = { prompt: query, response: response }
-    //     setResponses((prev) => {
+      openai.createCompletion('text-davinci-002', {
+        prompt: prompt,
+        temperature: 0.3,
+        max_tokens: 100,
+        top_p: 1.0,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+      }).then(res => {
+        const response = res.data.choices[0].text;
+        const obj = { prompt: query, response: response }
+        setResponses((prev) => {
+          return [...prev, obj]
+        });
+        setIsLoading(false)
 
-    //       return [...prev, obj]
-    //     })
+      }).catch(err => {
+        setIsLoading(false)
+        throw Error("Something went wrong. Please try again.", err);
+      })
+    } else {
+      setIsLoading(false)
+      throw Error("Couldn't find query and languages. Please try again.");
+    }
 
-    //   }).catch(err => {
-    //     throw Error("Something went wrong. Please try again.", err)
-    //   })
-    // } else {
-    //   throw Error("Couldn't find query and languages. Please try again.")
-    // }
   };
 
   const providerData = {
     responses,
-    getApiResponse
+    getApiResponse,
+    isLoading,
+    setIsLoading
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }

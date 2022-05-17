@@ -4,10 +4,10 @@ import { ApiContext } from '../Provider/ApiContext';
 export default function ListContainer() {
 
   const { responses } = useContext(ApiContext);
-  console.log(responses)
 
   return (
     <div>
+
       {responses.reverse().map((response, i) => (
         <ul key={i}>
           <li>{response.prompt}</li>
