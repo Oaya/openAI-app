@@ -14,9 +14,11 @@ export default function ApiProvider(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   const getApiResponse = (query, languages) => {
-    const langString = languages?.map(({ value }) => value).join(' and ');
-    let prompt = `Translate this into ${langString}: \n${query}\n`;
+    const langList = languages?.map(({ value }) => value)
+    const langString = langList.join(' and ');
 
+    let prompt = `Translate this into ${langString}: \n${query}\n`;
+    console.log(langList, langString)
     if (query && languages) {
       openai.createCompletion('text-davinci-002', {
         prompt: prompt,
@@ -27,8 +29,10 @@ export default function ApiProvider(props) {
         presence_penalty: 0.0,
       })
         .then(res => {
-          const response = res.data.choices[0].text;
-          const obj = { prompt: query, response: response }
+          const response = res.data.choices[0].text.split('\n');
+          //remove empty string from response list//
+          const responseArray = response.filter(Boolean)
+          const obj = { prompt: query, response: responseArray, languages: langList }
           setResponses((prev) => {
             return [...prev, obj]
           });

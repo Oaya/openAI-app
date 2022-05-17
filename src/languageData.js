@@ -1,6 +1,6 @@
 export const languagesList = [
   "Arabic",
-  "Chinese ",
+  "Chinese",
   "Czech",
   "Dutch",
   "English",

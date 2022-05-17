@@ -16,7 +16,6 @@ export default function Form() {
   const [option, setOption] = useState([]);
   const [inputError, setInputError] = useState('');
 
-
   const { error,
     interimResult,
     isRecording,
@@ -50,14 +49,11 @@ export default function Form() {
         setInputError('')
       }, 5000);
     } else {
-
       getApiResponse(enteredInput, option);
       queryInputRef.current.value = '';
       setOption([]);
       setInputError('');
-
     };
-
   };
 
   const handleChange = (input) => {
@@ -67,7 +63,10 @@ export default function Form() {
 
   //for the case speech to text doesn't work//
   if (error) {
-    setInputError("Web Speech API is not available in this browser")
+    setInputError("Web Speech API is not available in this browser");
+    setTimeout(() => {
+      setInputError('')
+    }, 5000);
     return <Error error={error} />
   }
 

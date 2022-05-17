@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import { Fragment } from "react";
 import Form from "./components/Form";
 import Header from "./components/Header";
-import ListContainer from "./components/ListContainer";
+import TranslateList from "./components/TranslateList";
+
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
     <Box w='70%' m='auto'>
       <Header />
       <Form />
-      <ListContainer />
+      <TranslateList />
     </Box>
   );
 }
