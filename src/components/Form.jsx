@@ -85,8 +85,10 @@ export default function Form() {
       <Flex direction={['column', 'column', 'row']} >
         <SubHeading textAlign={['center', 'center', 'left']} text=" Type the sentence you want to translate or speak it in English :" fontSize={['lg', 'lg', '2xl']} />
         <Spacer />
-        <Button width={['100%', '100%', '20%']}
+        <Button width={['100%', '100%', '30%', '20%']}
           my={['5', '5', '3']}
+          px={['10', '20', '18', '30']}
+          ml={['5', '0', '0']}
           onClick={isRecording ? stopSpeechToText : startSpeechToText} colorScheme='blue' color='white' >
           {isRecording ? "Stop recording" : "Start Recording"}
         </Button>
@@ -131,7 +133,7 @@ export default function Form() {
             </Button>)
         }
       </Box>
-    </Box>
+    </Box >
 
   )
 }

@@ -1,6 +1,7 @@
 import { TableContainer, Table, Tr, Tbody, Td, Box } from '@chakra-ui/react'
 import React from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
+import Tcell from './Table/Tcell';
 
 import TranslateButton from './TranslateButton';
 
@@ -9,23 +10,23 @@ export default function TranslateListItem({ prompt, response, languages, index }
 
   return (
     <Box>
-      <TableContainer bg={"#C4F1F9"} my={'5'} rounded='md'>
+      <TableContainer bg={"#C4F1F9"} my={'5'} rounded='md' p={'3'}>
         <Table colorScheme='teal' variant={'unstyled'} >
           <Tbody >
             <Tr >
-              <Td p={2} fontSize={'18'} fontWeight={'bold'}>Sentence :</Td>
-              <Td p={2} >{prompt}</Td>
+              <Tcell weight="bold" text="Sentence :" />
+              <Tcell text={prompt} />
             </Tr>
             <Tr>
-              <Td p={2} fontSize={'18'} fontWeight={'bold'}>Languages :</Td>
+              <Tcell weight="bold" text="Languages :" />
               {languages?.map((res, index) => (
-                <Td p={2} key={index}>{res}</Td>
+                <Tcell key={index} text={res} />
               ))}
             </Tr>
             <Tr>
-              <Td p={2} fontSize={'18'} fontWeight={'bold'}>Translations :</Td>
+              <Tcell weight="bold" text="Translations :" />
               {response?.map((res, i) => (
-                <Td p={2} key={i}>{res}
+                <Td p={[1, 1, 2]} fontSize={['12', '15', '18']} key={i}>{res}
                   <TranslateButton text={res} voice={voices[index[i]]} />
                 </Td>
               ))}
