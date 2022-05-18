@@ -8,13 +8,15 @@ import { ApiContext } from '../Provider/ApiContext';
 import { languagesList } from '../languageData';
 import Error from './Error';
 
-const languagesListObj = languagesList.map(lang => ({ label: lang, value: lang, hi: lang }));
+
+const languagesListObj = languagesList.map(item => ({ label: item.lang, value: item.lang, index: item.index }));
 
 export default function Form() {
   const { getApiResponse, setIsLoading, isLoading } = useContext(ApiContext);
   const queryInputRef = useRef();
   const [option, setOption] = useState([]);
   const [inputError, setInputError] = useState('');
+
 
   const { error,
     interimResult,
@@ -49,6 +51,7 @@ export default function Form() {
         setInputError('')
       }, 5000);
     } else {
+      console.log(option);
       getApiResponse(enteredInput, option);
       queryInputRef.current.value = '';
       setOption([]);
@@ -60,7 +63,6 @@ export default function Form() {
     setOption(input);
   };
 
-
   //for the case speech to text doesn't work//
   if (error) {
     setInputError("Web Speech API is not available in this browser");
@@ -70,8 +72,10 @@ export default function Form() {
     return <Error error={error} />
   }
 
+
   return (
     <Box w='70%' m='auto' my={'8'} >
+
       <Box m='auto' mb='10'>
         {inputError && <Error error={inputError} />}
         <Text

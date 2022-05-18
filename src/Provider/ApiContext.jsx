@@ -14,9 +14,10 @@ export default function ApiProvider(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   const getApiResponse = (query, languages) => {
-    const langList = languages?.map(({ value }) => value)
+    const langList = languages?.map(({ value }) => value);
+    const indexArray = languages?.map(({ index }) => index)
     const langString = langList.join(' and ');
-
+    console.log(languages, langList, indexArray)
     let prompt = `Translate this into ${langString}: \n${query}\n`;
 
     if (query && languages) {
@@ -32,7 +33,7 @@ export default function ApiProvider(props) {
           const response = res.data.choices[0].text.split('\n');
           //remove empty string from response list//
           const responseArray = response.filter(Boolean)
-          const obj = { prompt: query, response: responseArray, languages: langList }
+          const obj = { prompt: query, response: responseArray, languages: langList, index: indexArray }
           setResponses((prev) => {
             return [...prev, obj]
           });

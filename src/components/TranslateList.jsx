@@ -5,7 +5,7 @@ import TranslateListItem from './TranslateListItem';
 
 export default function TranslateList() {
   const { responses } = useContext(ApiContext);
-
+  console.log(responses)
   return (
     <Box>
       <Box w='70%' m='auto' mb={'10'} >
@@ -25,6 +25,7 @@ export default function TranslateList() {
               prompt={res.prompt}
               response={res.response}
               languages={res.languages}
+              index={res.index}
             />
           ))
         }
