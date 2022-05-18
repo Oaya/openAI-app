@@ -11,7 +11,7 @@ export default function TranslateList() {
   return (
 
     <Box w={['82%', '82%', '75%']} m='auto' mb={'10'} >
-      <SubHeading text="Your Translated List" fontSize={['2xl', '2xl', '4xl']} textAlign={'center'} />
+      <SubHeading text="Your Translation List" fontSize={['2xl', '2xl', '4xl']} textAlign={'center'} />
       {reversedRes.length === 0 ?
         (<Center bg={"#C4F1F9"} rounded='md' height={'40'} my={'5'} fontSize={'lg'} fontWeight={'bold'} >AI will find translations for you here!</Center>)
         : (

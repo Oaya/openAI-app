@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import useSpeechToText from 'react-hook-speech-to-text';
 import Creatable from 'react-select/creatable';
-import { Textarea, Button, Box, Text, Flex, Spacer } from '@chakra-ui/react';
+import { Textarea, Button, Box, Flex, Spacer } from '@chakra-ui/react';
 
 import { ApiContext } from '../Provider/ApiContext';
 import { languagesList } from '../languageData';
@@ -69,7 +69,7 @@ export default function Form() {
 
   return (
     <Box w={['82%', '82%', '75%']} m='auto' my={['5,', '5', '8']} >
-      <Box m='auto' mb='10'>
+      <Box m='auto' mb={['3', '3,', '10']}>
         {inputError && <Error error={inputError} />}
         <SubHeading text="What languages do you want to translate to :" fontSize={['lg', 'lg', '2xl']} />
 
@@ -87,23 +87,20 @@ export default function Form() {
         <Spacer />
         <Button width={['100%', '100%', '30%', '20%']}
           my={['5', '5', '3']}
-          px={['10', '20', '18', '30']}
-          ml={['5', '0', '0']}
+          px={['10', '20', '30']}
+
           onClick={isRecording ? stopSpeechToText : startSpeechToText} colorScheme='blue' color='white' >
           {isRecording ? "Stop recording" : "Start Recording"}
         </Button>
       </Flex>
 
       <Textarea
-
         bg='white'
         type='text'
         ref={queryInputRef}
         value={interimResult}
         size='md'
         placeholder='E.g.  How are you?'
-        fontWeight={'bold'}
-        color='blackAlpha.700'
       />
 
       <Box textAlign={['center', 'center', 'right']} my={['5', '5', '3']} >
