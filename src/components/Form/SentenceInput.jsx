@@ -3,6 +3,7 @@ import { Textarea, Button, Box, Flex, Spacer } from '@chakra-ui/react';
 import SubHeading from '../SubHeading';
 import { ApiContext } from '../../Provider/ApiContext';
 import { FormContext } from '../../Provider/FormContext';
+import SubmitButton from '../Buttons/SubmitButton';
 
 export default function SentenceInput() {
   const { isLoading } = useContext(ApiContext);
@@ -47,29 +48,9 @@ export default function SentenceInput() {
 
       <Box textAlign={['center', 'center', 'right']} my={['5', '5', '3']} >
 
-        {
-          isLoading ? (
-            <Button
-              width={['100%', '100%', '20%']}
-              isLoading
-              loadingText='Searching..'
-              colorScheme='cyan'
-              variant='solid'
-              color='white'
-              px='5'
-            >
-            </Button>
-          ) : (
-            <Button
-              width={['100%', '100%', '20%']}
-              px='10'
-              colorScheme='cyan'
-              variant='solid'
-              onClick={handleSubmit}
-              color='white'
-            >
-              Translate
-            </Button>)
+        {isLoading ?
+          (<SubmitButton px='5' isLoading={true} loadingText='Searching..' />)
+          : (<SubmitButton px='10' isLoading={false} text='Searching' handleSubmit={handleSubmit} />)
         }
       </Box>
     </>

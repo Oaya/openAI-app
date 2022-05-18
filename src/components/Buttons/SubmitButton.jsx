@@ -9,7 +9,9 @@ export default function SubmitButton(props) {
       variant='solid'
       color='white'
       px={props.px}
-      onClick={props.func()}
+      isLoading={props.isLoading}
+      loadingText={props.loadingText}
+      onClick={props.handleSubmit}
     >
       {props.text}
     </Button>

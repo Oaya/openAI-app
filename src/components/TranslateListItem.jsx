@@ -3,7 +3,7 @@ import React from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import Tcell from './Tcell';
 
-import TranslateButton from './TranslateButton';
+import TranslateButton from './Buttons/TranslateButton';
 
 export default function TranslateListItem({ prompt, response, languages, index }) {
   const { voices } = useSpeechSynthesis();
