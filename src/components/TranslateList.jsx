@@ -5,7 +5,7 @@ import TranslateListItem from './TranslateListItem';
 
 export default function TranslateList() {
   const { responses } = useContext(ApiContext);
-  console.log(responses)
+  const reversedRes = [...responses].reverse()
   return (
     <Box>
       <Box w='70%' m='auto' mb={'10'} >
@@ -19,7 +19,7 @@ export default function TranslateList() {
           Here are Your Translated List :
         </Heading>
         {
-          responses.reverse().map((res, i) => (
+          reversedRes.map((res, i) => (
             <TranslateListItem
               key={i}
               prompt={res.prompt}

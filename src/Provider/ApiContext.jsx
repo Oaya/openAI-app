@@ -17,7 +17,7 @@ export default function ApiProvider(props) {
     const langList = languages?.map(({ value }) => value);
     const indexArray = languages?.map(({ index }) => index)
     const langString = langList.join(' and ');
-    console.log(languages, langList, indexArray)
+
     let prompt = `Translate this into ${langString}: \n${query}\n`;
 
     if (query && languages) {

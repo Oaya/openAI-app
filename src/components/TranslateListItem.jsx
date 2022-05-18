@@ -1,9 +1,11 @@
 import { TableContainer, Table, Tr, Tbody, Td, Box } from '@chakra-ui/react'
-import React from 'react'
+import React from 'react';
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 import TranslateButton from './TranslateButton';
 
 export default function TranslateListItem({ prompt, response, languages, index }) {
+  const { voices } = useSpeechSynthesis({});
 
   return (
     <Box>
@@ -24,7 +26,7 @@ export default function TranslateListItem({ prompt, response, languages, index }
               <Td p={2} fontSize={'18'} fontWeight={'bold'}>Translations :</Td>
               {response?.map((res, i) => (
                 <Td p={2} key={i}>{res}
-                  <TranslateButton text={res} languageIndex={index[i]} />
+                  <TranslateButton text={res} voice={voices[index[i]]} />
                 </Td>
               ))}
             </Tr>

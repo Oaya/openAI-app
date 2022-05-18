@@ -1,6 +1,6 @@
 export const languagesList = [
   { lang: "Arabic", index: 23 },
-  { lang: "Chinese", index: 64 },
+  { lang: "Chinese", index: 36 },
   { lang: "Czech", index: 47 },
   { lang: "Dutch", index: 42 },
   { lang: "French", index: 54 },
@@ -13,6 +13,4 @@ export const languagesList = [
   { lang: "Russian", index: 63 },
   { lang: "Spanish", index: 53 },
   { lang: "Thai", index: 17 },
-
-
 ];
