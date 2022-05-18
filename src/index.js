@@ -6,8 +6,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ApiProvider from './Provider/ApiContext';
+import FormProvider from './Provider/FormContext';
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
 ReactDOM.render(
   <ChakraProvider theme={extendTheme({
     fonts: {
@@ -15,7 +15,9 @@ ReactDOM.render(
     }
   })}>
     <ApiProvider>
-      <App />
+      <FormProvider>
+        <App />
+      </FormProvider>
     </ApiProvider>
   </ChakraProvider>,
   document.getElementById('root')

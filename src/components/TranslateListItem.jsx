@@ -1,7 +1,7 @@
 import { TableContainer, Table, Tr, Tbody, Td, Box } from '@chakra-ui/react'
 import React from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
-import Tcell from './Table/Tcell';
+import Tcell from './Tcell';
 
 import TranslateButton from './TranslateButton';
 
