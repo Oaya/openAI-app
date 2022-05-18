@@ -1,5 +1,5 @@
 import React from 'react';
-import { Textarea, Button, Box, Text, Flex, Spacer, propNames } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 
 export default function SubHeading(props) {
   return (

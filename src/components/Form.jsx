@@ -68,10 +68,10 @@ export default function Form() {
   }
 
   return (
-    <Box w={['82%', '82%', '70%']} m='auto' my={['5,', '5', '8']} >
+    <Box w={['82%', '82%', '75%']} m='auto' my={['5,', '5', '8']} >
       <Box m='auto' mb='10'>
         {inputError && <Error error={inputError} />}
-        <SubHeading text="What languages do you want to translate to :" fontSize={['lg', 'lg', 'xl']} />
+        <SubHeading text="What languages do you want to translate to :" fontSize={['lg', 'lg', '2xl']} />
 
         <Creatable
           isMulti
@@ -83,11 +83,11 @@ export default function Form() {
       </Box>
 
       <Flex direction={['column', 'column', 'row']} >
-        <SubHeading textAlign={['center', 'center', '']} text=" Type the sentence you want to translate or speak it in English :" fontSize={['lg', 'lg', 'xl']} />
+        <SubHeading textAlign={['center', 'center', 'left']} text=" Type the sentence you want to translate or speak it in English :" fontSize={['lg', 'lg', '2xl']} />
         <Spacer />
         <Button width={['100%', '100%', '20%']}
           my={['5', '5', '3']}
-          onClick={isRecording ? stopSpeechToText : startSpeechToText} colorScheme='telegram' variant={'outline'} bg="white">
+          onClick={isRecording ? stopSpeechToText : startSpeechToText} colorScheme='blue' color='white' >
           {isRecording ? "Stop recording" : "Start Recording"}
         </Button>
       </Flex>

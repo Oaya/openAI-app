@@ -5,7 +5,7 @@ import { useSpeechSynthesis } from 'react-speech-kit';
 import TranslateButton from './TranslateButton';
 
 export default function TranslateListItem({ prompt, response, languages, index }) {
-  const { voices } = useSpeechSynthesis({});
+  const { voices } = useSpeechSynthesis();
 
   return (
     <Box>
