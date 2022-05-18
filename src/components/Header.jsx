@@ -5,11 +5,12 @@ export default function Header() {
   return (
     <div className="heading">
       <Box
+        fontFamily={'heading'}
         bgGradient="linear(to-b,#0a2269, #6600ff)"
         bgClip="text"
         fontWeight="extrabold">
         <Center>
-          <Heading as='h1' size='2xl'  >
+          <Heading as='h1' size='3xl'>
             Hello, World!
           </Heading>
         </Center>

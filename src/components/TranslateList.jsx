@@ -1,6 +1,7 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import React, { useContext } from 'react';
 import { ApiContext } from '../Provider/ApiContext';
+import SubHeading from './SubHeading';
 import TranslateListItem from './TranslateListItem';
 
 export default function TranslateList() {
@@ -8,16 +9,8 @@ export default function TranslateList() {
   const reversedRes = [...responses].reverse()
   return (
     <Box>
-      <Box w='70%' m='auto' mb={'10'} >
-        <Heading
-          as='h2'
-          size='lg'
-          bgGradient="linear(to-l, #6600ff,#0a2269)"
-          bgClip="text"
-          fontWeight="extrabold"
-        >
-          Here are Your Translated List :
-        </Heading>
+      <Box w='80%' m='auto' mb={'10'} >
+        <SubHeading text=" Here are Your Translated List :" fontSize={['2xl', '2xl', '3xl']} />
         {
           reversedRes.map((res, i) => (
             <TranslateListItem
