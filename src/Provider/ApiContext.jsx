@@ -8,6 +8,10 @@ const config = new Configuration({
 });
 const openai = new OpenAIApi(config);
 
+
+const shuffleList = (list) => list.sort(() => Math.random() - 0.5);
+const questionsList = [...questionList];
+const shuffleQuestionsList = shuffleList(questionsList);
 export const ApiContext = createContext();
 
 export default function ApiProvider(props) {
@@ -15,6 +19,8 @@ export default function ApiProvider(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [questionArray, setQuestionArray] = useState([]);
 
+  const [answerChoice, setAnswerChoice] = useState([]);
+  const [question, setQuestion] = useState(shuffleQuestionsList[0]);
   const getTranslate = (query, languages) => {
     const langList = languages?.map(({ value }) => value);
     const indexArray = languages?.map(({ index }) => index)
@@ -70,6 +76,12 @@ export default function ApiProvider(props) {
           const responseArray = response.filter(Boolean)
           console.log(responseArray)
           setQuestionArray(responseArray)
+          const answersList = [...responseArray];
+          const shuffleAnswersList = shuffleList(answersList);
+
+          const answerIndex = questionList.findIndex((item) => (item === shuffleQuestionsList[0]));
+          console.log(shuffleAnswersList, questionList, answerIndex, question)
+          setAnswerChoice([responseArray[answerIndex], shuffleAnswersList[1], shuffleAnswersList[2]])
           setIsLoading(false)
         })
         .catch(err => {
@@ -89,6 +101,7 @@ export default function ApiProvider(props) {
     getTranslate,
     getQuestion,
     setIsLoading,
+    answerChoice
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }
