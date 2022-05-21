@@ -14,3 +14,14 @@ export const languagesList = [
   { lang: "Spanish", index: 53 },
   { lang: "Thai", index: 17 },
 ];
+
+
+
+export const questionList = [
+  "How are you?",
+  "What is your occupation?",
+  "What is your name",
+  "Do you have siblings?",
+  "Did you eat breakfast?",
+  "Where is the closest station?"
+]

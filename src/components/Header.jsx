@@ -11,7 +11,7 @@ export default function Header() {
         fontWeight="extrabold">
         <Center>
           <Heading as='h1' size='3xl'>
-            Hello, World!
+            <a href='/'>Hello, World!</a>
           </Heading>
         </Center>
         <Center>
