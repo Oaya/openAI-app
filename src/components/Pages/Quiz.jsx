@@ -6,6 +6,7 @@ import { languagesList } from '../../languageData';
 import { ApiContext } from '../../Provider/ApiContext';
 import SubmitButton from '../Buttons/SubmitButton';
 import { FormContext } from '../../Provider/FormContext';
+import QuizContainer from '../QuizContainer';
 
 const languagesListObj = languagesList.map(item => ({ label: item.lang, value: item.lang, index: item.index }));
 
@@ -19,7 +20,7 @@ export default function Quiz() {
   }
 
   return (
-    <Box m='auto' mb={['3', '3,', '10']}>
+    <Box m='auto' mb={['3', '3,', '10']} w={['82%', '82%', '75%']}>
       <SubHeading text="Pick a Language " fontSize={['lg', 'lg', '2xl']} />
 
       <Creatable
@@ -27,10 +28,14 @@ export default function Quiz() {
         onChange={(option) => handleSelectChange(option)}
         placeholder="Select one from list or type in here"
       />
-      {isLoading ?
-        (<SubmitButton px='5' isLoading={true} loadingText='Loading..' />)
-        : (<SubmitButton px='10' isLoading={false} text='Start' handleSubmit={handleSubmit} />)
-      }
+      <Box textAlign={['center', 'center', 'right']} my={['5', '5', '3']} >
+        {isLoading ?
+          (<SubmitButton px='5' isLoading={true} loadingText='Loading..' />)
+          : (<SubmitButton px='10' isLoading={false} text='Start' handleSubmit={handleSubmit} />)
+        }
+      </Box>
+      <QuizContainer />
+
 
     </Box>
   )

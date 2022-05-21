@@ -20,8 +20,13 @@ export const languagesList = [
 export const questionList = [
   "How are you?",
   "What is your occupation?",
-  "What is your name",
-  "Do you have siblings?",
+  "What is your name?",
+  "I am from Canada",
+  "I have two sisters",
+  "What time is it now",
+  "I like reading books",
+  "I am 20 years old",
+  "Can you speak English?",
   "Did you eat breakfast?",
   "Where is the closest station?"
 ]

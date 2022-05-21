@@ -15,8 +15,7 @@ export default function ApiProvider(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [questionArray, setQuestionArray] = useState([]);
 
-
-  const getApiResponse = (query, languages) => {
+  const getTranslate = (query, languages) => {
     const langList = languages?.map(({ value }) => value);
     const indexArray = languages?.map(({ index }) => index)
     const langString = langList.join(' and ');
@@ -60,7 +59,7 @@ export default function ApiProvider(props) {
       openai.createCompletion('text-davinci-002', {
         prompt: prompt,
         temperature: 0.3,
-        max_tokens: 100,
+        max_tokens: 300,
         top_p: 1.0,
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
@@ -87,10 +86,9 @@ export default function ApiProvider(props) {
     responses,
     isLoading,
     questionArray,
-    getApiResponse,
+    getTranslate,
     getQuestion,
     setIsLoading,
-
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }

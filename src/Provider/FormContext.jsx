@@ -7,7 +7,7 @@ export const FormContext = createContext();
 export default function FormProvider(props) {
   const [inputError, setInputError] = useState('');
   const [option, setOption] = useState([]);
-  const { getQuestion, getApiResponse, isLoading, language, setLanguage, questionArray, setIsLoading } = useContext(ApiContext);
+  const { getQuestion, getTranslate, setIsLoading } = useContext(ApiContext);
 
   const { error,
     interimResult,
@@ -39,7 +39,7 @@ export default function FormProvider(props) {
       setIsLoading(false)
 
     } else {
-      getApiResponse(enteredInput, option);
+      getTranslate(enteredInput, option);
       queryInputRef.current.value = ''
       setOption([]);
     };
