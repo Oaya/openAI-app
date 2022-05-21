@@ -1,16 +1,26 @@
 import { Box } from "@chakra-ui/react";
-import Form from "./components/Form";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+
+import Translate from "./components/Pages/Translate";
+import Landing from "./components/Pages/Landing";
+import Quiz from "./components/Pages/Quiz";
 import Header from "./components/Header";
-import TranslateList from "./components/TranslateList";
 
 function App() {
   return (
-    <Box bg={'#EDFDFD'} >
-      <Header />
-      <Form />
-      <TranslateList />
-    </Box>
-  );
+    <>
+      <BrowserRouter>
+        <Box bg={'#EDFDFD'} >
+          <Header />
+          <Routes>
+            <Route path="/" element={<Landing />} exact />
+            <Route path="/quiz" element={<Quiz />} exact />
+            <Route path="/translate" element={<Translate />} exact />
+          </Routes>
+        </Box>
+      </BrowserRouter>
+    </>)
 }
 
 export default App;
