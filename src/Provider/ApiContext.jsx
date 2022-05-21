@@ -13,6 +13,8 @@ export const ApiContext = createContext();
 export default function ApiProvider(props) {
   const [responses, setResponses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [questionArray, setQuestionArray] = useState([]);
+  const [language, setLanguage] = useState('');
 
   const getApiResponse = (query, languages) => {
     const langList = languages?.map(({ value }) => value);
@@ -52,9 +54,8 @@ export default function ApiProvider(props) {
   };
 
   const getQuestion = (language) => {
-
     let prompt = `How to say \n${questionList}\n in ${language.value}`;
-    console.log(language, prompt)
+
     if (questionList && language) {
       openai.createCompletion('text-davinci-002', {
         prompt: prompt,
@@ -67,8 +68,8 @@ export default function ApiProvider(props) {
         .then(res => {
           const response = res.data.choices[0].text.split('\n')
           //remove empty string from response list//
-          const questionArray = response.filter(Boolean)
-          console.log(response, questionArray)
+          const responseArray = response.filter(Boolean)
+          setQuestionArray(responseArray)
           setIsLoading(false)
         })
         .catch(err => {
@@ -77,18 +78,19 @@ export default function ApiProvider(props) {
         })
     } else {
       setIsLoading(false)
-      throw Error("Couldn't find query and languages. Please try again.");
+      throw Error("Couldn't find language. Please try again.");
     }
-
-
   }
 
   const providerData = {
     responses,
     isLoading,
+    questionArray,
     getApiResponse,
     getQuestion,
-    setIsLoading
+    setIsLoading,
+    language,
+    setLanguage
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }
