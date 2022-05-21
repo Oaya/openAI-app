@@ -14,7 +14,7 @@ export default function ApiProvider(props) {
   const [responses, setResponses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [questionArray, setQuestionArray] = useState([]);
-  const [language, setLanguage] = useState('');
+
 
   const getApiResponse = (query, languages) => {
     const langList = languages?.map(({ value }) => value);
@@ -69,6 +69,7 @@ export default function ApiProvider(props) {
           const response = res.data.choices[0].text.split('\n')
           //remove empty string from response list//
           const responseArray = response.filter(Boolean)
+          console.log(responseArray)
           setQuestionArray(responseArray)
           setIsLoading(false)
         })
@@ -89,8 +90,7 @@ export default function ApiProvider(props) {
     getApiResponse,
     getQuestion,
     setIsLoading,
-    language,
-    setLanguage
+
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }

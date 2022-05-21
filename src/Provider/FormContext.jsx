@@ -7,7 +7,7 @@ export const FormContext = createContext();
 export default function FormProvider(props) {
   const [inputError, setInputError] = useState('');
   const [option, setOption] = useState([]);
-  const { getApiResponse, setIsLoading } = useContext(ApiContext);
+  const { getQuestion, getApiResponse, isLoading, language, setLanguage, questionArray, setIsLoading } = useContext(ApiContext);
 
   const { error,
     interimResult,
@@ -26,7 +26,7 @@ export default function FormProvider(props) {
     setOption(input);
   };
 
-  const handleFormSubmit = (queryInputRef) => {
+  const handleTranslateFormSubmit = (queryInputRef) => {
     setIsLoading(true)
     const enteredInput = queryInputRef.current.value;
 
@@ -49,18 +49,37 @@ export default function FormProvider(props) {
     }, 5000);
   };
 
+
+  const handleQuizFormSubmit = (language) => {
+    setIsLoading(true)
+    if (language.length === 0) {
+      setInputError("Please set Languages");
+      setIsLoading(false)
+    } else {
+      getQuestion(language)
+      setOption([]);
+    };
+
+    setTimeout(() => {
+      setInputError('')
+    }, 5000);
+
+  }
+
   const providerData = {
     inputError,
     option,
     setInputError,
     setOption,
     handleSelectChange,
-    handleFormSubmit,
+    handleTranslateFormSubmit,
     error,
     interimResult,
     isRecording,
     startSpeechToText,
-    stopSpeechToText
+    stopSpeechToText,
+    setIsLoading,
+    handleQuizFormSubmit
 
   }
   return <FormContext.Provider value={providerData}>{props.children}</FormContext.Provider>

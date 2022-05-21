@@ -8,7 +8,7 @@ import SubmitButton from '../Buttons/SubmitButton';
 export default function SentenceInput() {
   const { isLoading } = useContext(ApiContext);
   const {
-    handleFormSubmit,
+    handleTranslateFormSubmit,
     interimResult,
     isRecording,
     startSpeechToText,
@@ -19,7 +19,7 @@ export default function SentenceInput() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleFormSubmit(queryInputRef)
+    handleTranslateFormSubmit(queryInputRef)
   }
 
 
