@@ -18,15 +18,15 @@ export const languagesList = [
 
 
 export const questionList = [
-  "How are you?",
-  "What is your occupation?",
-  "What is your name?",
-  "I am from Canada",
-  "I have two sisters",
-  "What time is it now",
-  "I like reading books",
-  "I am 20 years old",
-  "Can you speak English?",
-  "Did you eat breakfast?",
-  "Where is the closest station?"
+  "\nHow are you?",
+  "\nWhat is your occupation?",
+  "\nWhat is your name?",
+  "\nI am from Canada",
+  "\nI have two sisters",
+  "\nWhat time is it now",
+  "\nI like reading books",
+  "\nI am 20 years old",
+  "\nCan you speak English?",
+  "\nDid you eat breakfast?",
+  "\nWhere is the closest station?"
 ]

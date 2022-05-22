@@ -65,8 +65,6 @@ export default function FormProvider(props) {
       setIsLoading(false)
     } else {
       getQuestion(language)
-
-
       setOption([]);
     };
 

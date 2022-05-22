@@ -65,7 +65,7 @@ export default function ApiProvider(props) {
   };
 
   const getQuestion = (language) => {
-    let prompt = `How to say \n${questionList}\n in ${language.value}`;
+    let prompt = `How to say ${questionList} in \n ${language.value}`;
 
     if (questionList && language) {
       openai.createCompletion('text-davinci-002', {
@@ -77,22 +77,17 @@ export default function ApiProvider(props) {
         presence_penalty: 0.0,
       })
         .then(res => {
-          const response = res.data.choices[0].text.split('\n')
+          const response = res.data.choices[0].text.split('\n');
           //remove empty string from response list//
-          const responseArray = response.filter(Boolean);
+          const responseArray = response.filter(Boolean)
+
           console.log(responseArray);//okay
           setQuestionArray(responseArray);
-
           //get answer//
           const answerIndex = questionList.findIndex((item) => (item === question));
           console.log(responseArray[answerIndex])//okay
-
           //remove answer from list and shuffle it//
           const answersList = [...responseArray]
-
-
-
-
           answersList.splice(answerIndex, 1);
           console.log(answersList);//oaky 
           const shuffleAnswersList = shuffleList(answersList);
