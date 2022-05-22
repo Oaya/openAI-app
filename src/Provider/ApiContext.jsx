@@ -10,8 +10,12 @@ const openai = new OpenAIApi(config);
 
 
 const shuffleList = (list) => list.sort(() => Math.random() - 0.5);
-const questionsList = [...questionList];
-const shuffleQuestionsList = shuffleList(questionsList);
+
+
+const shuffleQuestionsList = shuffleList([...questionList]);
+console.log(shuffleQuestionsList, questionList) //okay
+
+
 export const ApiContext = createContext();
 
 export default function ApiProvider(props) {
@@ -21,6 +25,8 @@ export default function ApiProvider(props) {
 
   const [answerChoice, setAnswerChoice] = useState([]);
   const [question, setQuestion] = useState(shuffleQuestionsList[0]);
+  const [answer, setAnswer] = useState('');
+
   const getTranslate = (query, languages) => {
     const langList = languages?.map(({ value }) => value);
     const indexArray = languages?.map(({ index }) => index)
@@ -73,15 +79,26 @@ export default function ApiProvider(props) {
         .then(res => {
           const response = res.data.choices[0].text.split('\n')
           //remove empty string from response list//
-          const responseArray = response.filter(Boolean)
-          console.log(responseArray)
-          setQuestionArray(responseArray)
-          const answersList = [...responseArray];
-          const shuffleAnswersList = shuffleList(answersList);
+          const responseArray = response.filter(Boolean);
+          console.log(responseArray);//okay
+          setQuestionArray(responseArray);
 
-          const answerIndex = questionList.findIndex((item) => (item === shuffleQuestionsList[0]));
-          console.log(shuffleAnswersList, questionList, answerIndex, question)
-          setAnswerChoice([responseArray[answerIndex], shuffleAnswersList[1], shuffleAnswersList[2]])
+          //get answer//
+          const answerIndex = questionList.findIndex((item) => (item === question));
+          console.log(responseArray[answerIndex])//okay
+
+          //remove answer from list and shuffle it//
+          const answersList = [...responseArray]
+
+
+
+
+          answersList.splice(answerIndex, 1);
+          console.log(answersList);//oaky 
+          const shuffleAnswersList = shuffleList(answersList);
+          console.log(shuffleAnswersList[1], shuffleAnswersList[2], responseArray[answerIndex])
+          setAnswerChoice([responseArray[answerIndex], shuffleAnswersList[1], shuffleAnswersList[2]]);
+          setAnswer(responseArray[answerIndex])
           setIsLoading(false)
         })
         .catch(err => {
@@ -101,7 +118,10 @@ export default function ApiProvider(props) {
     getTranslate,
     getQuestion,
     setIsLoading,
-    answerChoice
+    answerChoice,
+    question,
+    setQuestion,
+    answer
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }
