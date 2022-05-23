@@ -1,17 +1,21 @@
-import React from 'react';
-import { Alert, AlertIcon, AlertDescription } from '@chakra-ui/react';
+import React from "react";
+import {
+  Alert,
+  AlertIcon,
+  AlertDescription,
+} from "@chakra-ui/react";
 
 export default function Error(props) {
   return (
-
     <Alert
       status={props.status}
-      height={'9'}
-      rounded='md'
+      py={["1", "2"]}
+      rounded="md"
     >
       <AlertIcon />
-      <AlertDescription>{props.text}</AlertDescription>
+      <AlertDescription>
+        {props.text}
+      </AlertDescription>
     </Alert>
-
-  )
+  );
 }

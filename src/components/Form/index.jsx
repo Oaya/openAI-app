@@ -6,10 +6,7 @@ import LanguageInput from './LanguageInput';
 import { FormContext } from '../../Provider/FormContext';
 import SentenceInput from './SentenceInput';
 
-
-
 export default function Form() {
-
   const { setInputError, error } = useContext(FormContext);
   //for the case speech to text doesn't work//
 
@@ -22,7 +19,7 @@ export default function Form() {
   }
 
   return (
-    <Box w={['82%', '82%', '75%']} m='auto' my={['5,', '5', '8']} >
+    <Box w={['82%', '82%', '75%']} m='auto' my={['5', '5', '8']} >
       <LanguageInput />
       <SentenceInput />
     </Box>
