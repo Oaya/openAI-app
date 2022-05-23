@@ -23,6 +23,7 @@ export default function ApiProvider(props) {
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('');
   const [finish, setFinish] = useState(false);
+  const [language, setLanguage] = useState('')
 
   const getTranslate = (query, languages) => {
     const langList = languages?.map(({ value }) => value);
@@ -63,6 +64,7 @@ export default function ApiProvider(props) {
 
   const getQuestion = (language) => {
     let prompt = `How to say ${questionList} in \n ${language.value}`;
+    setLanguage(language.value);
 
     if (questionList && language) {
       openai.createCompletion('text-davinci-002', {
@@ -99,7 +101,6 @@ export default function ApiProvider(props) {
     //get answer//
     const question = shuffleQuestionsList[questionIdx];
 
-
     setQuestion(shuffleQuestionsList[questionIdx]);
     const answerIndex = questionList.findIndex((item) => (item === question));
 
@@ -107,9 +108,7 @@ export default function ApiProvider(props) {
 
     const answersList = [...responseArray];
     answersList.splice(answerIndex, 1)
-
     const shuffleAnswersList = shuffleList([...answersList]);
-
     setAnswerChoice([responseArray[answerIndex], shuffleAnswersList[1], shuffleAnswersList[2]]);
   }
 
@@ -131,7 +130,8 @@ export default function ApiProvider(props) {
     shuffleAnswers,
     questionIdx,
     finish,
-    setFinish
+    setFinish,
+    language
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }

@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Text, Stack, Radio, RadioGroup, Button } from '@chakra-ui/react';
+import { Box, Text, Stack, Radio, RadioGroup, Button, Flex } from '@chakra-ui/react';
 import uuid from 'react-uuid'
+
 import { ApiContext } from '../Provider/ApiContext';
 import EmptyContainer from './EmptyContainer';
-
 import Error from './Error';
 import { FormContext } from '../Provider/FormContext';
+import SubHeading from './SubHeading';
 
 
 export default function QuizContainer() {
@@ -14,15 +15,13 @@ export default function QuizContainer() {
   const [popUp, setPopUp] = useState();
   const { inputError, setInputError } = useContext(FormContext);
 
-  const { questionArray, question, answer, finish, setFinish, shuffleAnswers, setQuestionIdx, questionIdx, isLoading, createQuestionAndAnswerFromList } = useContext(ApiContext);
+  const { questionArray, question, answer, finish, setFinish, shuffleAnswers, setQuestionIdx, questionIdx, isLoading, createQuestionAndAnswerFromList, language } = useContext(ApiContext);
 
   useEffect(() => {
-
     if (questionIdx === 5) {
       setTimeout(() => {
         setFinish(true);
       }, 3000);
-
     }
     setTimeout(() => {
       createQuestionAndAnswerFromList(questionArray)
@@ -60,32 +59,41 @@ export default function QuizContainer() {
     <Box>
       {questionArray.length === 0 || isLoading ? (<EmptyContainer text='Your Quiz will show in here!' />) : finish ? (<EmptyContainer text={`Your Score is ${score}/ 5`} />) : (
         <>
+          <SubHeading text="Pick the best one from the choice" fontSize={['xl', 'xl', '2xl']} textAlign={'center'} />
           {popUp &&
             <Error status={popUp.status} text={popUp.text} />
           }
           {inputError && <Error text={inputError} status="error" />}
-          <Text>Pick the correct one from choice?</Text>
-          <Text>{question}</Text>
 
-          <RadioGroup onChange={setPickedAnswer} value={pickedAnswer} colorScheme='cyan'>
-            <Stack direction='column'>
-              {shuffleAnswers.map((answer) => (
-                <Radio key={uuid()} value={answer} >{answer}</Radio>
-              ))}
+          <Box bg={"#C4F1F9"} rounded='md' mt={'5'} mb={'10'} p={5} fontSize={'lg'} fontWeight={'bold'}>
+            <Flex direction={['column', 'column', 'row']} justifyContent={"space-between"} mb='5'>
 
-            </Stack>
-          </RadioGroup>
-          <Text>Your Score:{score}/ 5</Text>
-          <Button width={['100%', '100%', '30%', '20%']}
-            my={['5', '5', '3']}
-            px={['10', '20', '30']}
+              <Text as="span" fontSize={['md', 'md', 'lg']}>How to say <Text as="span" color={"#805AD5"} fontWeight={'bold'} fontSize={['lg', 'lg', 'xl']}>{question}
+              </Text>  in {language} </Text>
+              <Text fontSize={['sm', 'md', 'lg']} alignSelf={'right'}>Your Score: {score}/ 5</Text>
+            </Flex>
 
-            onClick={handleAnswer} colorScheme='blue' color='white' >
-            Check
-          </Button>
+            <Flex direction={'row'} justifyContent={"space-between"}>
+              <RadioGroup onChange={setPickedAnswer} value={pickedAnswer} _checked={{ color: 'green' }}>
+                <Stack direction='column'>
+                  {shuffleAnswers.map((answer) => (
+                    <Radio key={uuid()} value={answer} size={'lg'} colorScheme='cyan' bg="white" >{answer}</Radio>
+                  ))}
+
+                </Stack>
+
+              </RadioGroup>
+
+              <Button width={['10%', '20%']} alignSelf={"flex-end"}
+                px={['10', '20', '30']}
+                onClick={handleAnswer} colorScheme='blue' color='white'  >
+                Check
+              </Button>
+            </Flex>
+          </Box>
         </>
       )
       }
-    </Box>
+    </Box >
   )
 }

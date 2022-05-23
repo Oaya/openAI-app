@@ -15,7 +15,6 @@ export default function Quiz() {
   const { handleSelectChange, handleQuizFormSubmit, option } = useContext(FormContext)
   const { setFinish, setQuestionIdx } = useContext(ApiContext);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setFinish(false);
@@ -24,8 +23,8 @@ export default function Quiz() {
   }
 
   return (
-    <Box m='auto' mb={['3', '3,', '10']} w={['82%', '82%', '75%']}>
-      <SubHeading text="Pick a Language " fontSize={['lg', 'lg', '2xl']} />
+    <Box m='auto' my={['3', '3,', '10']} w={['82%', '82%', '75%']}>
+      <SubHeading text="Pick a Language " fontSize={['lg', 'lg', '3xl']} />
 
       <Creatable
         options={languagesListObj}
@@ -39,8 +38,6 @@ export default function Quiz() {
         }
       </Box>
       <QuizContainer />
-
-
     </Box>
   )
 }
