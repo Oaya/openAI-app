@@ -16,7 +16,7 @@ export default function LanguageInput() {
 
   return (
     <Box m='auto' mb={['3', '3,', '10']}>
-      {inputError && <Error error={inputError} />}
+      {inputError && <Error text={inputError} status="error" />}
       <SubHeading text="What languages do you want to translate to :" fontSize={['lg', 'lg', '2xl']} />
 
       <Creatable

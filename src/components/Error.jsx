@@ -5,12 +5,12 @@ export default function Error(props) {
   return (
 
     <Alert
-      status='error'
+      status={props.status}
       height={'9'}
       rounded='md'
     >
       <AlertIcon />
-      <AlertDescription>{props.error}</AlertDescription>
+      <AlertDescription>{props.text}</AlertDescription>
     </Alert>
 
   )

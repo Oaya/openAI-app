@@ -75,12 +75,12 @@ export default function ApiProvider(props) {
       })
         .then(res => {
           const response = res.data.choices[0].text.split('\n');
-          console.log(response)
+
           //remove empty string from response list//
           const responseArray = response.filter(ele => {
             return ele !== "" && isNaN(ele)
           });
-          console.log(responseArray)
+
           setQuestionArray(responseArray);
           createQuestionAndAnswerFromList(responseArray)
           setIsLoading(false)
@@ -99,7 +99,7 @@ export default function ApiProvider(props) {
     //get answer//
     const question = shuffleQuestionsList[questionIdx];
 
-    // console.log(shuffleQuestionsList[questionIdx], responseArray, questionList)
+
     setQuestion(shuffleQuestionsList[questionIdx]);
     const answerIndex = questionList.findIndex((item) => (item === question));
 

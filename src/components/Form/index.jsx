@@ -18,7 +18,7 @@ export default function Form() {
     setTimeout(() => {
       setInputError('')
     }, 5000);
-    return <Error error={error} />
+    return <Error text={error} status="error" />
   }
 
   return (
