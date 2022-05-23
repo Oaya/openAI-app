@@ -6,21 +6,28 @@ import EmptyContainer from './EmptyContainer';
 
 
 export default function QuizContainer() {
-
   const [pickedAnswer, setPickedAnswer] = useState('');
   const [score, setScore] = useState(0);
   const [popUp, setPopUp] = useState();
 
-  const { questionArray, question, answer, shuffleAnswers, setQuestionIdx, questionIdx, createQuestionAndAnswerFromList } = useContext(ApiContext);
+
+  const { questionArray, question, answer, finish, setFinish, shuffleAnswers, setQuestionIdx, questionIdx, isLoading, createQuestionAndAnswerFromList } = useContext(ApiContext);
 
   useEffect(() => {
-    createQuestionAndAnswerFromList(questionArray)
+    console.log(questionIdx)
+    if (questionIdx === 5) {
+      setFinish(true);
+    }
+    setTimeout(() => {
+      createQuestionAndAnswerFromList(questionArray)
+    }, 2000);
   }, [questionIdx])
 
 
   console.log(pickedAnswer, answer, shuffleAnswers)
   const handleAnswer = (e) => {
     e.preventDefault();
+
     if (pickedAnswer === answer) {
       setScore((prev) => prev + 1)
       setPopUp({ text: "You are Correct!! Good Job!", status: 'success' });
@@ -32,14 +39,13 @@ export default function QuizContainer() {
       setPopUp()
     }, 2000);
     //get next question//
-    setPickedAnswer('')
+    setPickedAnswer('');
     setQuestionIdx((prev => prev + 1));
   }
 
-
   return (
     <Box>
-      {questionArray.length === 0 ? (<EmptyContainer />) : (
+      {questionArray.length === 0 || isLoading ? (<EmptyContainer text='Your Quiz will show in here!' />) : finish ? (<EmptyContainer text={`Your Score is ${score}/ 5`} />) : (
         <>
           {popUp && <Alert status={popUp.status}>
             <AlertIcon />
@@ -56,7 +62,7 @@ export default function QuizContainer() {
 
             </Stack>
           </RadioGroup>
-          <Text>Your Score:{score}</Text>
+          <Text>Your Score:{score}/ 5</Text>
           <Button width={['100%', '100%', '30%', '20%']}
             my={['5', '5', '3']}
             px={['10', '20', '30']}
@@ -69,9 +75,6 @@ export default function QuizContainer() {
 
       )
       }
-
-
-
-    </Box >
+    </Box>
   )
 }

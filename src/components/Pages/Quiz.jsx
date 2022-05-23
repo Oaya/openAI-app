@@ -13,9 +13,13 @@ const languagesListObj = languagesList.map(item => ({ label: item.lang, value: i
 export default function Quiz() {
   const { isLoading } = useContext(ApiContext);
   const { handleSelectChange, handleQuizFormSubmit, option } = useContext(FormContext)
+  const { setFinish, setQuestionIdx } = useContext(ApiContext);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFinish(false);
+    setQuestionIdx(0)
     handleQuizFormSubmit(option)
   }
 
