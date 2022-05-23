@@ -10,10 +10,9 @@ const openai = new OpenAIApi(config);
 
 
 const shuffleList = (list) => list.sort(() => Math.random() - 0.5);
-
-
 const shuffleQuestionsList = shuffleList([...questionList]);
-console.log(shuffleQuestionsList, questionList) //okay
+
+
 
 
 export const ApiContext = createContext();
@@ -22,9 +21,9 @@ export default function ApiProvider(props) {
   const [responses, setResponses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [questionArray, setQuestionArray] = useState([]);
-
   const [answerChoice, setAnswerChoice] = useState([]);
-  const [question, setQuestion] = useState(shuffleQuestionsList[0]);
+  const [questionIdx, setQuestionIdx] = useState(0)
+  const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('');
 
   const getTranslate = (query, languages) => {
@@ -80,22 +79,8 @@ export default function ApiProvider(props) {
           const response = res.data.choices[0].text.split('\n');
           //remove empty string from response list//
           const responseArray = response.filter(Boolean)
-
-          console.log(responseArray);//okay
           setQuestionArray(responseArray);
-          //get answer//
-          const answerIndex = questionList.findIndex((item) => (item === question));
-          console.log(responseArray[answerIndex])//okay
-          //remove answer from list and shuffle it//
-          const answersList = [...responseArray]
-          answersList.splice(answerIndex, 1);
-          console.log(answersList);//oaky 
-          const shuffleAnswersList = shuffleList(answersList);
-          console.log(shuffleAnswersList[1], shuffleAnswersList[2], responseArray[answerIndex])
-
-          setAnswerChoice([responseArray[answerIndex], shuffleAnswersList[1], shuffleAnswersList[2]]);
-          setAnswer(responseArray[answerIndex])
-
+          createQuestionAndAnswerFromList(responseArray)
           setIsLoading(false)
         })
         .catch(err => {
@@ -107,20 +92,42 @@ export default function ApiProvider(props) {
       throw Error("Couldn't find language. Please try again.");
     }
   }
+
+  const createQuestionAndAnswerFromList = (responseArray) => {
+    //get answer//
+    const question = shuffleQuestionsList[questionIdx];
+
+    // console.log(shuffleQuestionsList[questionIdx], responseArray, questionList)
+    setQuestion(shuffleQuestionsList[questionIdx]);
+    const answerIndex = questionList.findIndex((item) => (item === question));
+
+    setAnswer(responseArray[answerIndex]);
+
+    const answersList = [...responseArray];
+    answersList.splice(answerIndex, 1)
+
+    const shuffleAnswersList = shuffleList([...answersList]);
+
+    setAnswerChoice([responseArray[answerIndex], shuffleAnswersList[1], shuffleAnswersList[2]]);
+  }
+
   const shuffleAnswers = shuffleList([...answerChoice]);
 
   const providerData = {
     responses,
     isLoading,
     questionArray,
+    setQuestionIdx,
     getTranslate,
     getQuestion,
     setIsLoading,
+    setQuestion,
+    createQuestionAndAnswerFromList,
     answerChoice,
     question,
-    setQuestion,
     answer,
-    shuffleAnswers
+    shuffleAnswers,
+    questionIdx
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }

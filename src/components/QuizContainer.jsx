@@ -1,31 +1,39 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Text, Stack, Radio, RadioGroup, Button, Alert, AlertIcon } from '@chakra-ui/react';
 import uuid from 'react-uuid'
 import { ApiContext } from '../Provider/ApiContext';
 import EmptyContainer from './EmptyContainer';
 
+
 export default function QuizContainer() {
 
   const [pickedAnswer, setPickedAnswer] = useState('');
   const [score, setScore] = useState(0);
-  const [popUp, setPopUp] = useState()
-  const { questionArray, question, answer, shuffleAnswers } = useContext(ApiContext);
+  const [popUp, setPopUp] = useState();
+
+  const { questionArray, question, answer, shuffleAnswers, setQuestionIdx, questionIdx, createQuestionAndAnswerFromList } = useContext(ApiContext);
+
+  useEffect(() => {
+    createQuestionAndAnswerFromList(questionArray)
+  }, [questionIdx])
 
 
-  console.log(question, answer, pickedAnswer);
-
-
-
+  console.log(pickedAnswer, answer, shuffleAnswers)
   const handleAnswer = (e) => {
     e.preventDefault();
     if (pickedAnswer === answer) {
       setScore((prev) => prev + 1)
       setPopUp({ text: "You are Correct!! Good Job!", status: 'success' });
+    } else {
+      setPopUp({ text: `Wrong Answer, ${answer} is correct answer.`, status: "error" });
     }
-    setPopUp({ text: `Wrong Answer, ${answer} is correct answer.`, status: "error" });
+
     setTimeout(() => {
       setPopUp()
-    }, 5000);
+    }, 2000);
+    //get next question//
+    setPickedAnswer('')
+    setQuestionIdx((prev => prev + 1));
   }
 
 

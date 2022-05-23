@@ -2,20 +2,12 @@ import React, { createContext, useState, useContext, } from 'react';
 import useSpeechToText from 'react-hook-speech-to-text';
 import { ApiContext } from './ApiContext';
 
-
 export const FormContext = createContext();
-
-const shuffleList = (list) => list.sort(() => Math.random() - 0.5);
-
 
 export default function FormProvider(props) {
   const [inputError, setInputError] = useState('');
   const [option, setOption] = useState([]);
-  const { getQuestion, getTranslate, setIsLoading, questionArray } = useContext(ApiContext);
-
-
-
-
+  const { getQuestion, getTranslate, setIsLoading, } = useContext(ApiContext);
 
   const { error,
     interimResult,
