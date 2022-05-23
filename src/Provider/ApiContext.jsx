@@ -92,8 +92,10 @@ export default function ApiProvider(props) {
           console.log(answersList);//oaky 
           const shuffleAnswersList = shuffleList(answersList);
           console.log(shuffleAnswersList[1], shuffleAnswersList[2], responseArray[answerIndex])
+
           setAnswerChoice([responseArray[answerIndex], shuffleAnswersList[1], shuffleAnswersList[2]]);
           setAnswer(responseArray[answerIndex])
+
           setIsLoading(false)
         })
         .catch(err => {
@@ -105,6 +107,7 @@ export default function ApiProvider(props) {
       throw Error("Couldn't find language. Please try again.");
     }
   }
+  const shuffleAnswers = shuffleList([...answerChoice]);
 
   const providerData = {
     responses,
@@ -116,7 +119,8 @@ export default function ApiProvider(props) {
     answerChoice,
     question,
     setQuestion,
-    answer
+    answer,
+    shuffleAnswers
   }
   return <ApiContext.Provider value={providerData}>{props.children}</ApiContext.Provider>
 }
